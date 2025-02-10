@@ -1,16 +1,16 @@
 version: 2
 
 sources:
-    - name: raw
-      description: "Source des données brutes"
-      schema: gz_raw_data
-      tables:        
-        - name: raw_gz_sales
-          alias: sales
-          description: "Table des ventes"
-        - name: raw_gz_product
-          alias: product
-          description: "Table des produits"
-        - name: raw_gz_ship
-          alias: ship
-          description: "Table des expéditions"
+  - name: raw
+    description: "Source des données brutes"
+    schema: gz_raw_data
+    tables:
+      - name: raw_gz_sales
+        alias: sales
+        description: "Table des ventes"
+      - name: raw_gz_product
+        alias: product
+        description: "Table des produits"
+      - name: raw_gz_ship
+        alias: ship
+        description: "Table des expéditions"
