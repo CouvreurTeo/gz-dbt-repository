@@ -7,10 +7,44 @@ sources:
     tables:
       - name: raw_gz_sales
         alias: sales
-        description: "Table des ventes"
+        description: "Table des ventes de Greenweez"
+
+        loaded_at_field: "CAST(date_date AS TIMESTAMP)"
+        freshness: 
+          warn_after: {count: 90, period: day}
+        columns:
+          - name: date_date
+    
+        tests:
+           - unique:
+               column_name: "(orders_id || '-' || pdt_id)"
+
+        columns:
+          - name: orders_id
+            tests:
+              - not_null
+        
+          - name: pdt_id
+            tests:
+              - not_null
+
       - name: raw_gz_product
         alias: product
-        description: "Table des produits"
+        description: "Table des produits de Greenweez"
+        columns:
+          - name: products_id
+            tests:
+              - unique
+              - not_null
+
       - name: raw_gz_ship
         alias: ship
-        description: "Table des expéditions"
+        description: "Table des expéditions de Greenweez"
+        columns:
+          - name: orders_id
+            tests:
+              - unique
+              - not_null
+
+       
+
