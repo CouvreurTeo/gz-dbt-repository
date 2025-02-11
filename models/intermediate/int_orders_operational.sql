@@ -12,20 +12,23 @@ subquery_c AS (
         orders_id,
         shipping_fee_per_order,
         logcost_per_order,
-        shipping_fee_per_order + logcost_per_order + ship_cost_per_order AS operational_cost_per_order
+        ship_cost_per_order,
+        logcost_per_order + ship_cost_per_order AS operational_cost_per_order
     FROM subquery_b
 )
 SELECT
     iom.orders_id,
     iom.date_date,
     iom.margin_per_order,
-    sqc.operational_cost_per_order,
     iom.revenue_per_order,
     iom.purchase_cost_per_order,
+    iom.qty_sold,
+    sqc.operational_cost_per_order,
+    sqc.ship_cost_per_order,
     sqc.shipping_fee_per_order,
     sqc.logcost_per_order,
-    iom.qty_sold,
-    iom.margin_per_order - sqc.operational_cost_per_order AS operational_margin_per_order
+    iom.margin_per_order + sqc.shipping_fee_per_order - sqc.operational_cost_per_order AS operational_margin_per_order
 FROM {{ ref('int_orders_margin') }} AS iom
 INNER JOIN subquery_c AS sqc
 ON iom.orders_id = sqc.orders_id
+ORDER BY orders_id DESC
