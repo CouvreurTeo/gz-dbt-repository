@@ -1,13 +1,11 @@
 version: 2
 
 sources:
-  - name: raw
-    description: "Source des données brutes"
+  - name: raw  
     schema: gz_raw_data
     tables:
-      - name: raw_gz_sales
-        alias: sales
-        description: "Table des ventes de Greenweez"
+      - name: sales
+        identifier: raw_gz_sales
 
         loaded_at_field: "CAST(date_date AS TIMESTAMP)"
         freshness: 
@@ -28,23 +26,21 @@ sources:
             tests:
               - not_null
 
-      - name: raw_gz_product
-        alias: product
-        description: "Table des produits de Greenweez"
+      - name: product
+        identifier: raw_gz_product
+
         columns:
           - name: products_id
             tests:
               - unique
               - not_null
+      
+      - name: ship
+        identifier: raw_gz_ship
 
-      - name: raw_gz_ship
-        alias: ship
-        description: "Table des expéditions de Greenweez"
         columns:
           - name: orders_id
             tests:
               - unique
               - not_null
-
-       
 
