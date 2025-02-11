@@ -1,9 +1,9 @@
 SELECT
     orders_id,
     date_date,
-    ROUND(SUM(revenue), 2) AS revenue,
-    ROUND(SUM(quantity), 2) AS quantity,
-    ROUND(SUM (purchase_cost), 2) AS purchase_cost,
-    ROUND(SUM(margin), 2) AS margin
+    SUM (revenue) AS revenue_per_order,
+    SUM (quantity) AS quantity_per_order,
+    SUM (purchase_cost) AS purchase_cost_per_order,
+    SUM (margin) AS margin_per_order
 FROM {{ ref('int_sales_margin') }}
 GROUP BY orders_id, date_date
