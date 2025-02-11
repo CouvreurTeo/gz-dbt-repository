@@ -13,4 +13,5 @@ ON rgs.products_id = rgp.products_id
 )
 SELECT *,
 revenue - purchase_cost AS margin,
+{{ margin_percent('revenue', 'purchase_cost') }} AS margin_pct_default,
 FROM subquery_a
